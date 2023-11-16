@@ -1,6 +1,6 @@
 #!/bin/bash
 
-total=$(echo "256 * 256" | bc)
+total=$((256 * 256))
 processed=0
 
 # Function to ping an IP address
@@ -14,10 +14,10 @@ ping_ip() {
     ((processed++))
 
     # Calculate the progress percentage
-    progress=$(echo "scale=2; $processed * 100 / $total" | bc)
+    progress=$((processed * 100 / total))
 
     # Update the status bar
-    printf "Progress: %.2f%%\r" "$progress"
+    printf "Progress: %d%%\r" "$progress"
 }
 
 # Loop through all possible IP addresses in the 10.15.*.* range using GNU Parallel

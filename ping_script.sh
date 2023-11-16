@@ -5,8 +5,6 @@ ping_ip() {
     ip="$1"
     if ping -c 1 -W 1 "$ip" > /dev/null 2>&1; then
         echo "Host $ip is reachable."
-    else
-        echo "Host $ip is unreachable."
     fi
 }
 

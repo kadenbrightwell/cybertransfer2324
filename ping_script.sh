@@ -14,7 +14,7 @@ ping_ip() {
     ((processed++))
 
     # Calculate the progress percentage
-    progress=$(echo "scale=2; $processed * 100 / $total" | bc)
+    progress=$(echo "scale=2; $processed * 100 / $total")
 
     # Update the status bar
     printf "Progress: %.2f%%\r" "$progress"

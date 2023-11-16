@@ -1,11 +1,23 @@
 #!/bin/bash
 
+total=$(echo "256 * 256" | bc)
+processed=0
+
 # Function to ping an IP address
 ping_ip() {
     ip="$1"
     if ping -c 1 -W 1 "$ip" > /dev/null 2>&1; then
         echo "Host $ip is reachable."
     fi
+
+    # Increment the processed count
+    ((processed++))
+
+    # Calculate the progress percentage
+    progress=$(echo "scale=2; $processed * 100 / $total" | bc)
+
+    # Update the status bar
+    printf "Progress: %.2f%%\r" "$progress"
 }
 
 # Loop through all possible IP addresses in the 10.15.*.* range using GNU Parallel
@@ -18,3 +30,6 @@ done
 
 # Wait for all background processes to finish
 wait
+
+# Print a new line after the status bar to separate it from the following output
+echo ""
